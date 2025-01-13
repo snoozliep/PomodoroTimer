@@ -39,7 +39,7 @@
             text-align: center; /* Center text */
         }
 
-        button {
+        .timer button, .controls button, .start button{
             padding: 10px 20px;
             font-size: 16px;
             border: none;
@@ -49,10 +49,38 @@
             cursor: pointer;
             transition: background-color 0.3s;
             margin: 10px;
+
         }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 3px;
+            background-color: #ff69b4;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin: 10px;
+        }
+
+        /* Add this to your existing CSS */
+        .task button {
+            background-color: #ececec; /* Light red background */
+            color: black; /* Black text */
+            text-align: right;
+            justify-content: right;
+            
+        }
+
+        .task button:hover {
+            background-color: #ff1493; /* Darker red on hover */
+        }
+
         button:hover {
             background-color: #ff1493;
         }
+
         .controls {
             display: flex; /* Use flexbox for horizontal layout */
             justify-content: center; /* Center the controls */
@@ -75,7 +103,6 @@
             align-items: center; /* Center items vertically */
         }
 
-
         .settings input {
             margin: 10px; /* Space between inputs */
             margin-top: -20px;
@@ -86,20 +113,42 @@
             border-radius: 10px; /* Rounded input corners */
             border: 2px solid #ff69b4; /* Pink border */
             transition: border-color 0.3s; /* Smooth border transition */
-
-
         }
         .settings input:focus {
-            border-color: #ff1493; /* Darker pink on focus */
+            border-color: #ff1493; Darker pink on focus
             outline: none; /* Remove default outline */
         }
 
+        /* Task Section Styles */
+        .task-section {
+            margin-top: 20px;
+            text-align: center; /* Center text in input fields */
+        }
+        .task{
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 3px; /* Rounded corners */
+            background-color: #fff; /* White background */
+            box-shadow: 0 2px 5px rgba(60, 60, 60, 0.1);
+            
+        }
+        .status {
+            margin: 10px; /* Space between inputs */
+            padding: 10px;
+            width: 150px; /* Set width for task input */
+        }
+        .task input {
+            margin: 10px; /* Space between inputs */
+            padding: 10px;
+            width: 150px; /* Set width for task input */
 
-
+        }
+        
     </style>
 </head>
+<link rel="icon" href="https://static.vecteezy.com/system/resources/previews/019/527/038/non_2x/an-8-bit-retro-styled-pixel-art-illustration-of-a-red-garden-tomato-free-png.png">
+
 <body>
-<!--<h1>Pomodoro Timer</h1>-->
 <div class="timer" id="timer">25:00</div>
 <div class="start">
     <button id="workButton">Start Work</button>
@@ -115,6 +164,19 @@
     <button id="pauseButton">Pause</button>
     <button id="playButton">Play</button>
     <button id="resetButton">Reset</button>
+</div>
+
+<!-- Task Section -->
+<div class="task-section">
+    <h2>Your Tasks</h2>
+    <input class= "task" type="text" id="taskInput" placeholder="Add a new task..." />
+    <select class="status" id="statusSelect">
+        <option value="not started">Not Yet Started</option>
+        <option value="in progress">In Progress</option>
+        <option value="done">Done</option>
+    </select>
+    <button onclick="addTask()">Add Task</button>
+    <div id="taskList"></div>
 </div>
 
 <script>
@@ -188,17 +250,41 @@
         resetTimer();
     });
 
+    // Task Management Functions
+    function addTask() {
+        const taskInput = document.getElementById('taskInput');
+        const statusSelect = document.getElementById('statusSelect');
+        const taskList = document.getElementById('taskList');
+
+        if (taskInput.value.trim() === "") {
+            alert("Please enter a task.");
+            return;
+        }
+
+        const taskDiv = document.createElement('div');
+        taskDiv.className = 'task';
+        taskDiv.innerHTML = `
+            <span>${taskInput.value} - <strong class="status">${statusSelect.value}</strong></span>
+            <button onclick="removeTask(this)">Remove</button>
+        `;
+
+        taskList.appendChild(taskDiv);
+        taskInput.value = ""; // Clear input
+    }
+
+    function removeTask(button) {
+        const taskDiv = button.parentElement;
+        taskDiv.remove();
+    }
+
     updateTimerDisplay(); // Initial display
 
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('service-worker.js').then(() => {
-                console.log('Service Worker registered');
-            });
+            navigator.serviceWorker.register('service-worker.js');
         });
     }
-
-
 </script>
+
 </body>
 </html>
