@@ -4,287 +4,303 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cute Pomodoro Timer</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #ffebcd;
-            background-image: url('https://example.com/cute-cat-pattern.png'); /* Replace with your cat image URL */
-            background-size: 100px 100px; /* Adjust size of the background pattern */
-            background-repeat: repeat;
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-        }
-        h1 {
-            color: #ff69b4;
-            font-size: 60px;
-        }
-        .timer {
-            font-size: 98px;
-            margin: 15px;
-            padding: 20px;
-            border: 5px solid #ff69b4;
-            border-radius: 15px;
-            background-color: #fff;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            width: 100%; /* Set a fixed width for alignment */
-            height: 15%;
-            display: flex; /* Use flexbox */
-            align-items: center; /* Center vertically */
-            justify-content: center; /* Center horizontally */
-            text-align: center; /* Center text */
-        }
-
-        .timer button, .controls button, .start button{
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 10px;
-            background-color: #ff69b4;
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin: 10px;
-
-        }
-
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 3px;
-            background-color: #ff69b4;
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin: 10px;
-        }
-
-        /* Add this to your existing CSS */
-        .task button {
-            background-color: #ececec; /* Light red background */
-            color: black; /* Black text */
-            text-align: right;
-            justify-content: right;
-            
-        }
-
-        .task button:hover {
-            background-color: #ff1493; /* Darker red on hover */
-        }
-
-        button:hover {
-            background-color: #ff1493;
-        }
-
-        .controls {
-            display: flex; /* Use flexbox for horizontal layout */
-            justify-content: center; /* Center the controls */
-            margin-top: 10px; /* Space above controls */
-        }
-        .controls button {
-            margin: 0 5px; /* Space between buttons */
-        }
-
-        .start button {
-            margin: 8px; /* Space between buttons */
-            width: 118px;
-            margin-bottom: 10px;
-            font-size: 15px;
-        }
-
-        .settings {
-            margin: 20px 0;
-            display: flex;
-            align-items: center; /* Center items vertically */
-        }
-
-        .settings input {
-            margin: 10px; /* Space between inputs */
-            margin-top: -20px;
-            margin-bottom: -20px;
-            padding: 10px;
-            width: 95px; /* Set width for input fields */
-            text-align: center; /* Center text in input fields */
-            border-radius: 10px; /* Rounded input corners */
-            border: 2px solid #ff69b4; /* Pink border */
-            transition: border-color 0.3s; /* Smooth border transition */
-        }
-        .settings input:focus {
-            border-color: #ff1493; Darker pink on focus
-            outline: none; /* Remove default outline */
-        }
-
-        /* Task Section Styles */
-        .task-section {
-            margin-top: 20px;
-            text-align: center; /* Center text in input fields */
-        }
-        .task{
-            margin: 10px 0;
-            padding: 10px;
-            border-radius: 3px; /* Rounded corners */
-            background-color: #fff; /* White background */
-            box-shadow: 0 2px 5px rgba(60, 60, 60, 0.1);
-            
-        }
-        .status {
-            margin: 10px; /* Space between inputs */
-            padding: 10px;
-            width: 150px; /* Set width for task input */
-        }
-        .task input {
-            margin: 10px; /* Space between inputs */
-            padding: 10px;
-            width: 150px; /* Set width for task input */
-
-        }
-        
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="https://static.vecteezy.com/system/resources/previews/019/527/038/non_2x/an-8-bit-retro-styled-pixel-art-illustration-of-a-red-garden-tomato-free-png.png">
 </head>
-<link rel="icon" href="https://static.vecteezy.com/system/resources/previews/019/527/038/non_2x/an-8-bit-retro-styled-pixel-art-illustration-of-a-red-garden-tomato-free-png.png">
 
 <body>
-<div class="timer" id="timer">25:00</div>
-<div class="start">
-    <button id="workButton">Start Work</button>
-    <button id="breakButton">Start Break</button>
-</div>
+    <div class="bento-grid minimal">
+        <div class="bento-item timer-section">
+            <div class="timer" id="timer">25:00</div>
+            <div class="timer-controls">
+                <button id="workButton">Work</button>
+                <button id="breakButton">Break</button>
+            </div>
+            <div class="timer-controls" style="margin-top:6px;">
+                <input type="number" id="workTime" value="25" min="1" placeholder="Work (min)">
+                <input type="number" id="breakTime" value="5" min="1" placeholder="Break (min)">
+            </div>
+            <div class="timer-controls" style="margin-top:6px;">
+                <button id="pauseButton">Pause</button>
+                <button id="playButton">Play</button>
+                <button id="resetButton">Reset</button>
+            </div>
+        </div>
+        <div class="bento-item grades-section">
+            <h2>Grades</h2>
+            <div class="input-group">
+                <input class="grade-input" type="text" id="subjectInput" placeholder="Subject">
+                <input class="grade-input" type="date" id="dueDateInput" placeholder="Due Date">
+                <input class="grade-input" type="number" id="gradeInput" placeholder="Grade" min="0" max="100">
+                <select class="grade-input" id="typeSelect">
+                    <option value="homework">Homework</option>
+                    <option value="quiz">Quiz</option>
+                    <option value="exam">Exam</option>
+                </select>
+                <button onclick="addGrade()">Add</button>
+            </div>
+            <div style="margin-bottom: 12px;">
+                <input type="text" id="newSectionInput" placeholder="Add subject section..." style="width: 60%;">
+                <button onclick="addSection()">Add Section</button>
+            </div>
+            <div id="sectionsContainer">
+                <!-- Sections will be added here -->
+            </div>
+        </div>
+        <div class="bento-item calendar-section">
+            <h2>Calendar</h2>
+            <div class="input-group">
+                <input class="calendar-input" type="date" id="calendarDate">
+                <input class="calendar-input" type="text" id="calendarEvent" placeholder="Event/Reminder">
+                <button onclick="addEvent()">Add</button>
+            </div>
+            <div id="calendarList" class="list-container"></div>
+        </div>
+        <div class="bento-item task-section">
+            <h2>Tasks</h2>
+            <div class="input-group">
+                <input class="task" type="text" id="taskInput" placeholder="Add a new task...">
+                <select class="status" id="statusSelect">
+                    <option value="not started">Not Started</option>
+                    <option value="in progress">In Progress</option>
+                    <option value="done">Done</option>
+                </select>
+                <button onclick="addTask()">Add</button>
+            </div>
+            <div id="taskList" class="list-container"></div>
+        </div>
+    </div>
 
-<div class="settings">
-    <input type="number" id="workTime" value="25" min="1" placeholder="Work (min)">
-    <input type="number" id="breakTime" value="5" min="1" placeholder="Break (min)">
-</div>
+    <script>
+        // Notes Functions
+        function addNote() {
+            const noteInput = document.getElementById('noteInput');
+            const notesList = document.getElementById('notesList');
 
-<div class="controls">
-    <button id="pauseButton">Pause</button>
-    <button id="playButton">Play</button>
-    <button id="resetButton">Reset</button>
-</div>
-
-<!-- Task Section -->
-<div class="task-section">
-    <h2>Your Tasks</h2>
-    <input class= "task" type="text" id="taskInput" placeholder="Add a new task..." />
-    <select class="status" id="statusSelect">
-        <option value="not started">Not Yet Started</option>
-        <option value="in progress">In Progress</option>
-        <option value="done">Done</option>
-    </select>
-    <button onclick="addTask()">Add Task</button>
-    <div id="taskList"></div>
-</div>
-
-<script>
-    let timer;
-    let timeLeft = 1500; // 25 minutes in seconds
-    let workDuration = 1500; // 25 minutes
-    let breakDuration = 300; // 5 minutes
-    let isPaused = false;
-
-    function updateTimerDisplay() {
-        const minutes = Math.floor(timeLeft / 60);
-        const seconds = timeLeft % 60;
-        document.getElementById('timer').textContent =
-            `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-    }
-
-    function startTimer(duration) {
-        if (timer) return; // Prevent multiple timers
-        timeLeft = duration;
-        updateTimerDisplay();
-        timer = setInterval(() => {
-            if (!isPaused) {
-                timeLeft--;
-                updateTimerDisplay();
-                if (timeLeft <= 0) {
-                    clearInterval(timer);
-                    timer = null;
-                    alert("Time's up!");
-                }
+            if (noteInput.value.trim() === "") {
+                alert("Please enter a note.");
+                return;
             }
-        }, 1000);
-    }
 
-    function pauseTimer() {
-        isPaused = true;
-    }
-
-    function playTimer() {
-        isPaused = false;
-    }
-
-    function resetTimer() {
-        clearInterval(timer);
-        timer = null;
-        timeLeft = workDuration; // Reset to work duration
-        isPaused = false; // Reset pause state
-        updateTimerDisplay();
-    }
-
-    document.getElementById('workButton').addEventListener('click', () => {
-        workDuration = document.getElementById('workTime').value * 60; // Convert minutes to seconds
-        resetTimer(); // Reset before starting work timer
-        startTimer(workDuration);
-    });
-
-    document.getElementById('breakButton').addEventListener('click', () => {
-        breakDuration = document.getElementById('breakTime').value * 60; // Convert minutes to seconds
-        resetTimer(); // Reset before starting break timer
-        startTimer(breakDuration);
-    });
-
-    document.getElementById('pauseButton').addEventListener('click', () => {
-        pauseTimer();
-    });
-
-    document.getElementById('playButton').addEventListener('click', () => {
-        playTimer();
-    });
-
-    document.getElementById('resetButton').addEventListener('click', () => {
-        resetTimer();
-    });
-
-    // Task Management Functions
-    function addTask() {
-        const taskInput = document.getElementById('taskInput');
-        const statusSelect = document.getElementById('statusSelect');
-        const taskList = document.getElementById('taskList');
-
-        if (taskInput.value.trim() === "") {
-            alert("Please enter a task.");
-            return;
+            const noteDiv = document.createElement('div');
+            noteDiv.className = 'note-item';
+            noteDiv.innerHTML = `
+                <span>${noteInput.value}</span>
+                <button onclick="removeNote(this)">×</button>
+            `;
+            notesList.appendChild(noteDiv);
+            noteInput.value = "";
         }
 
-        const taskDiv = document.createElement('div');
-        taskDiv.className = 'task';
-        taskDiv.innerHTML = `
-            <span>${taskInput.value} - <strong class="status">${statusSelect.value}</strong></span>
-            <button onclick="removeTask(this)">Remove</button>
-        `;
+        function removeNote(button) {
+            const noteDiv = button.parentElement;
+            noteDiv.remove();
+        }
 
-        taskList.appendChild(taskDiv);
-        taskInput.value = ""; // Clear input
-    }
+        // Calendar Functions
+        function addEvent() {
+            const calendarDate = document.getElementById('calendarDate');
+            const calendarEvent = document.getElementById('calendarEvent');
+            const calendarNotes = document.getElementById('calendarNotes');
+            const calendarList = document.getElementById('calendarList');
 
-    function removeTask(button) {
-        const taskDiv = button.parentElement;
-        taskDiv.remove();
-    }
+            if (calendarDate.value === "" || calendarEvent.value.trim() === "") {
+                alert("Please enter both date and event.");
+                return;
+            }
 
-    updateTimerDisplay(); // Initial display
+            const eventDiv = document.createElement('div');
+            eventDiv.className = 'calendar-item';
+            eventDiv.innerHTML = `
+                <span><strong>${calendarDate.value}</strong>: ${calendarEvent.value}${calendarNotes.value ? ' - ' + calendarNotes.value : ''}</span>
+                <button onclick="removeEvent(this)">×</button>
+            `;
+            calendarList.appendChild(eventDiv);
+            calendarDate.value = "";
+            calendarEvent.value = "";
+            calendarNotes.value = "";
+        }
 
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('service-worker.js');
+        function removeEvent(button) {
+            const eventDiv = button.parentElement;
+            eventDiv.remove();
+        }
+
+        let timer;
+        let timeLeft = 1500; // 25 minutes in seconds
+        let workDuration = 1500; // 25 minutes
+        let breakDuration = 300; // 5 minutes
+        let isPaused = false;
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('timer').textContent =
+                `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
+
+        function startTimer(duration) {
+            if (timer) return; // Prevent multiple timers
+            timeLeft = duration;
+            updateTimerDisplay();
+            timer = setInterval(() => {
+                if (!isPaused) {
+                    timeLeft--;
+                    updateTimerDisplay();
+                    if (timeLeft <= 0) {
+                        clearInterval(timer);
+                        timer = null;
+                        alert("Time's up!");
+                    }
+                }
+            }, 1000);
+        }
+
+        function pauseTimer() {
+            isPaused = true;
+        }
+
+        function playTimer() {
+            isPaused = false;
+        }
+
+        function resetTimer() {
+            clearInterval(timer);
+            timer = null;
+            timeLeft = workDuration; // Reset to work duration
+            isPaused = false; // Reset pause state
+            updateTimerDisplay();
+        }
+
+        document.getElementById('workButton').addEventListener('click', () => {
+            workDuration = document.getElementById('workTime').value * 60; // Convert minutes to seconds
+            resetTimer(); // Reset before starting work timer
+            startTimer(workDuration);
         });
-    }
-</script>
 
+        document.getElementById('breakButton').addEventListener('click', () => {
+            breakDuration = document.getElementById('breakTime').value * 60; // Convert minutes to seconds
+            resetTimer(); // Reset before starting break timer
+            startTimer(breakDuration);
+        });
+
+        document.getElementById('pauseButton').addEventListener('click', () => {
+            pauseTimer();
+        });
+
+        document.getElementById('playButton').addEventListener('click', () => {
+            playTimer();
+        });
+
+        document.getElementById('resetButton').addEventListener('click', () => {
+            resetTimer();
+        });
+
+        // Grades Tracker Functions
+        function addGrade() {
+            const subjectInput = document.getElementById('subjectInput');
+            const dueDateInput = document.getElementById('dueDateInput');
+            const gradeInput = document.getElementById('gradeInput');
+            const typeSelect = document.getElementById('typeSelect');
+            let sectionName = subjectInput.value.trim();
+            if (!sectionName) {
+                alert('Please enter a subject for the section.');
+                return;
+            }
+            const sectionTable = document.getElementById('table-' + sectionName);
+            if (!sectionTable) {
+                alert('Please add the section first.');
+                return;
+            }
+            if (gradeInput.value.trim() === '' || dueDateInput.value === '') {
+                alert('Please enter due date and grade.');
+                return;
+            }
+            const gradesList = sectionTable.querySelector('tbody');
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${dueDateInput.value}</td>
+                <td>${gradeInput.value}</td>
+                <td>${typeSelect.value}</td>
+                <td><button onclick="removeGrade(this)">×</button></td>
+            `;
+            gradesList.appendChild(row);
+            dueDateInput.value = '';
+            gradeInput.value = '';
+            typeSelect.value = 'homework';
+        }
+
+        function addSection() {
+            const newSectionInput = document.getElementById('newSectionInput');
+            const sectionsContainer = document.getElementById('sectionsContainer');
+            const sectionName = newSectionInput.value.trim();
+            if (!sectionName) {
+                alert('Please enter a subject name.');
+                return;
+            }
+            if (document.getElementById('table-' + sectionName)) {
+                alert('Section already exists.');
+                return;
+            }
+            const sectionDiv = document.createElement('div');
+            sectionDiv.className = 'grades-subsection';
+            sectionDiv.innerHTML = `
+                <h3>${sectionName}</h3>
+                <table id="table-${sectionName}" class="grades-table">
+                    <thead>
+                        <tr>
+                            <th>Due Date</th>
+                            <th>Grade</th>
+                            <th>Type</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            `;
+            sectionsContainer.appendChild(sectionDiv);
+            newSectionInput.value = '';
+        }
+
+        function removeGrade(button) {
+            const row = button.parentElement.parentElement;
+            row.remove();
+        }
+
+        // Task Management Functions
+        function addTask() {
+            const taskInput = document.getElementById('taskInput');
+            const statusSelect = document.getElementById('statusSelect');
+            const taskList = document.getElementById('taskList');
+
+            if (taskInput.value.trim() === "") {
+                alert("Please enter a task.");
+                return;
+            }
+
+            const taskDiv = document.createElement('div');
+            taskDiv.className = 'task';
+            taskDiv.innerHTML = `
+                <span>${taskInput.value} - <strong class="status">${statusSelect.value}</strong></span>
+                <button onclick="removeTask(this)">×</button>
+            `;
+
+            taskList.appendChild(taskDiv);
+            taskInput.value = ""; // Clear input
+        }
+
+        function removeTask(button) {
+            const taskDiv = button.parentElement;
+            taskDiv.remove();
+        }
+
+        updateTimerDisplay(); // Initial display
+
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js');
+            });
+        }
+    </script>
 </body>
 </html>

@@ -1,0 +1,264 @@
+body {
+    font-family: 'Georgia', 'Times New Roman', Times, serif;
+    background: #f8f8f8;
+    color: #222;
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 32px 16px;
+    line-height: 1.6;
+}
+
+/* Minimalistic Bento grid layout */
+.bento-grid.minimal {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(200px, 1fr));
+    grid-template-rows: repeat(2, auto);
+    gap: 16px;
+    width: min(1400px, 100%);
+    margin: 0 auto;
+    padding: 0;
+    background: transparent;
+}
+
+.bento-item {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.04);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-width: 0;
+    min-height: 0;
+    overflow: visible;
+}
+
+.timer-section.bento-item {
+    grid-column: 1 / 3; /* Spans columns 1-2 */
+    grid-row: 1;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.grades-section.bento-item {
+    grid-column: 3; /* Single column on the right */
+    grid-row: 1 / 3; /* Spans both rows */
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.calendar-section.bento-item {
+    grid-column: 1;
+    grid-row: 2;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.task-section.bento-item {
+    grid-column: 2;
+    grid-row: 2;
+    height: auto;
+}
+
+.timer {
+    font-size: 24px;
+    margin-bottom: 12px;
+    padding: 8px 0;
+    border-radius: 6px;
+    background: #f9f9f9;
+    width: 100%;
+    text-align: center;
+    color: #111;
+    font-family: 'Georgia', 'Times New Roman', Times, serif;
+    word-wrap: break-word;
+    line-height: 1.2;
+    max-width: 100%;
+}
+
+h2 {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 16px;
+    color: #111;
+    letter-spacing: 0.1px;
+}
+
+input, select, textarea {
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid #bbb;
+    background: #fff;
+    color: #111;
+    margin-bottom: 0;
+    padding: 10px 12px;
+    box-sizing: border-box;
+    flex: 1;
+    word-wrap: break-word;
+    max-width: 100%;
+}
+
+textarea {
+    min-height: 60px;
+    resize: vertical;
+}
+
+button {
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid #bbb;
+    background: #fff;
+    color: #111;
+    margin-bottom: 0;
+    padding: 8px 10px;
+    box-sizing: border-box;
+    width: auto;
+    cursor: pointer;
+    transition: background 0.2s;
+    flex-shrink: 0;
+}
+
+button:hover {
+    background: #eaeaea;
+}
+
+.task, .grade-item, .calendar-item {
+    margin: 8px 0;
+    padding: 12px 14px;
+    border-radius: 4px;
+    background: #f9f9f9;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    color: #111;
+    word-wrap: break-word;
+    flex-wrap: wrap;
+    font-size: 14px;
+    min-height: auto;
+}
+
+.task button, .grade-item button, .calendar-item button {
+    background: #f9f9f9;
+    border: 1px solid #bbb;
+    padding: 4px 8px;
+    cursor: pointer;
+    font-size: 12px;
+    width: auto;
+    flex-shrink: 0;
+}
+
+.input-group {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.list-container {
+    width: 100%;
+    margin-top: 16px;
+    overflow: visible;
+}
+
+.timer-controls {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.grades-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 18px;
+    font-size: 14px;
+    background: #fff;
+    overflow-x: auto;
+    word-wrap: break-word;
+}
+
+.grades-table th, .grades-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+    word-wrap: break-word;
+}
+
+.grades-table th {
+    background: #f9f9f9;
+    font-weight: 500;
+}
+
+.grades-table th:last-child, .grades-table td:last-child {
+    width: 60px;
+    text-align: center;
+}
+
+.grades-table td button {
+    background: #f9f9f9;
+    border: 1px solid #bbb;
+    padding: 2px 6px;
+    cursor: pointer;
+    font-size: 12px;
+    width: auto;
+}
+
+.grades-table td button:hover {
+    background: #eaeaea;
+}
+
+/* Added sub-sections for different subjects in grades */
+.grades-subsection {
+    margin-bottom: 20px;
+}
+
+.grades-subsection h3 {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: #111;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+
+.math-grades, .science-grades, .english-grades, .history-grades {
+    margin-bottom: 15px;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .bento-grid.minimal {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+    .timer-section.bento-item {
+        grid-column: 1;
+        grid-row: 1;
+    }
+    .grades-section.bento-item {
+        grid-column: 1;
+        grid-row: 2;
+    }
+    .calendar-section.bento-item {
+        grid-column: 1;
+        grid-row: 3;
+    }
+    .task-section.bento-item {
+        grid-column: 1;
+        grid-row: 4;
+    }
+    .timer {
+        font-size: 20px;
+    }
+}
